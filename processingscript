@@ -1,0 +1,312 @@
+
+import ddf.minim.*;
+Minim minim;
+AudioPlayer song;
+
+import controlP5.*;
+ControlP5 controlP5;
+
+PFont f, f2;
+String[] words;
+int x1, x2;
+String p_attempt;
+int word_out=0;
+int invalid_attempts=0;
+int len;
+char[] chars=new char[15];
+int index;
+PImage img1;
+PImage img2;
+PImage img3;
+PImage img4;
+PImage wrong;
+
+void setup() {
+  clear();
+  background(255, 204, 0);
+  size(720, 480);
+  controlP5 = new ControlP5(this);
+  words=loadStrings("wordlist.txt");
+  index= int(random(words.length));
+  len=words[index].length();
+  word_out=0;
+  invalid_attempts=0;
+  
+//  minim = new Minim(this);
+//  song = minim.loadFile("01 Final Countdown.mp3");
+
+  
+  
+  f = createFont("Arial", 20, true);
+  f2 = createFont("Arial", 50, true);
+  img1 = loadImage("tl.png");
+  img2 = loadImage("tr.png");
+  img3 = loadImage("bl.png");
+  img4 = loadImage("br.png");
+  wrong = loadImage("wrong_attempt.png");
+
+ frameRate(30);
+
+  //alphabets button panels
+  //ROW WISE
+  controlP5.addButton("A", 0, 100, 100, 30, 15);
+  controlP5.addButton("B", 0, 150, 100, 30, 15);
+  controlP5.addButton("C", 0, 200, 100, 30, 15);
+  controlP5.addButton("D", 0, 250, 100, 30, 15);
+  controlP5.addButton("E", 0, 300, 100, 30, 15);
+
+  controlP5.addButton("F", 0, 100, 140, 30, 15);
+  controlP5.addButton("G", 0, 150, 140, 30, 15);
+  controlP5.addButton("H", 0, 200, 140, 30, 15);
+  controlP5.addButton("I", 0, 250, 140, 30, 15);
+  controlP5.addButton("J", 0, 300, 140, 30, 15);
+
+  controlP5.addButton("K", 0, 100, 180, 30, 15);
+  controlP5.addButton("L", 0, 150, 180, 30, 15);
+  controlP5.addButton("M", 0, 200, 180, 30, 15);
+  controlP5.addButton("N", 0, 250, 180, 30, 15);
+  controlP5.addButton("O", 0, 300, 180, 30, 15);
+
+  controlP5.addButton("P", 0, 100, 220, 30, 15);
+  controlP5.addButton("Q", 0, 150, 220, 30, 15);
+  controlP5.addButton("R", 0, 200, 220, 30, 15);
+  controlP5.addButton("S", 0, 250, 220, 30, 15);
+  controlP5.addButton("T", 0, 300, 220, 30, 15);
+
+  controlP5.addButton("U", 0, 100, 260, 30, 15);
+  controlP5.addButton("V", 0, 150, 260, 30, 15);
+  controlP5.addButton("W", 0, 200, 260, 30, 15);
+  controlP5.addButton("X", 0, 250, 260, 30, 15);
+  controlP5.addButton("Y", 0, 300, 260, 30, 15);
+
+  controlP5.addButton("Z", 0, 100, 300, 30, 15);
+
+  wordsetup();
+
+  lifesetup();
+}
+
+
+void draw() {
+//   song.play();
+
+}
+
+
+void wordsetup() {
+  //extract characters
+  
+  for (int i=0; i<len; i++) { 
+    chars[i]=words[index].charAt(i);
+  }
+  //this is for the number of blanks to be displayed for alphabets other than vowels 
+  for (int i=0; i<len; i++) {
+    stroke(0);
+    x1=400+(25*i);
+    x2=420+(25*i);
+    textFont(f);
+    fill(0);
+    int vowel_found=checkvowel(chars[i]);
+    if (vowel_found==1) { 
+      text(chars[i], (x1+10), 199);
+      word_out++;
+    } else {
+      line(x1, 200, x2, 200);
+    }
+  }
+}
+
+int checkvowel(char to_check) {
+  int vow;
+  if (to_check=='a'|| to_check=='e'|| to_check=='i'|| to_check=='o'|| to_check=='u') {
+    vow=1;
+  } else {
+    vow=0;
+  }
+  return vow;
+}
+
+void lifesetup() {
+  image(img1, 410, 250, 200, 200);
+  image(img2, 410, 250, 200, 200);
+  image(img3, 410, 250, 200, 200);
+  image(img4, 410, 250, 200, 200);
+}
+
+void A() {
+  p_attempt = "a";
+  validate2();
+}
+void B() {
+  p_attempt = "b";
+  validate2();
+}
+
+void C() {
+  p_attempt = "c";
+  validate2();
+}
+
+void D() {
+  p_attempt = "d";
+  validate2();
+}
+
+void E() {
+  p_attempt = "e";
+  validate2();
+}
+
+void F() {
+  p_attempt = "f";
+  validate2();
+}
+
+void G() {
+  p_attempt = "g";
+  validate2();
+}
+
+void H() {
+  p_attempt = "h";
+  validate2();
+}
+
+void I() {
+  p_attempt = "i";
+  validate2();
+}
+
+void J() {
+  p_attempt = "j";
+  validate2();
+}
+
+void K() {
+  p_attempt = "k";
+  validate2();
+}
+
+void L() {
+  p_attempt = "l";
+  validate2();
+}
+
+void M() {
+  p_attempt = "m";
+  validate2();
+}
+
+void N() {
+  p_attempt = "n";
+  validate2();
+}
+
+void O() {
+  p_attempt = "o";
+  validate2();
+}
+
+void P() {
+  p_attempt = "p";
+  validate2();
+}
+
+void Q() {
+  p_attempt = "q";
+  validate2();
+}
+
+void R() {
+  p_attempt = "r";
+  validate2();
+}
+
+void S() {
+  p_attempt = "s";
+  validate2();
+}
+
+void T() {
+  p_attempt = "t";
+  validate2();
+}
+
+void U() {
+  p_attempt = "u";
+  validate2();
+}
+
+void V() {
+  p_attempt = "v";
+  validate2();
+}
+
+void W() {
+  p_attempt = "w";
+  validate2();
+}
+
+void X() {
+  p_attempt = "x";
+  validate2();
+}
+
+void Y() {
+  p_attempt = "y";
+  validate2();
+}
+
+void Z() {
+  p_attempt = "z";
+  validate2();
+}
+void Play_Again() {
+  setup();
+}
+
+void validate2() {
+  int validity=0;
+
+  for (int i=0; i<len; i++)
+  {
+    if (chars[i]==p_attempt.charAt(0)) {
+      chars[i]='0';
+      textFont(f);
+      text(p_attempt, (405+(25*i)), 199);
+      validity=1;        
+      word_out++;
+    }
+  }
+  if (word_out==len) {
+    textFont(f2);
+    background(155, 150, 0);
+    text("Congratulations", 120, 400);
+    
+  }
+
+  if (validity==0) {
+    invalid_attempt();
+  }
+}
+
+
+void invalid_attempt() {
+  invalid_attempts++;
+  if (invalid_attempts==1) {
+    image(wrong, 410, 250, 100, 100);
+  }
+  if (invalid_attempts==2) {
+    image(wrong, 510, 250, 100, 100);
+  }
+  if (invalid_attempts==3) {
+    image(wrong, 510, 350, 100, 100);
+  }
+  if (invalid_attempts==4) {
+    image(wrong, 410, 350, 100, 100);
+    background(255, 150, 0); 
+    textFont(f2);
+    text("Game Over", 120, 400);
+    
+  }
+}
